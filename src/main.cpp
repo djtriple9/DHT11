@@ -69,13 +69,20 @@ void setup() {
 #ifndef SERIAL_DEBUG_DISABLED
   SetupSerialDebug(115200);
 #endif
-
-  // Create the global SensESPApp() object
+  // Construct the global SensESPApp() object
   SensESPAppBuilder builder;
-  sensesp_app = builder.get_app();
+  sensesp_app = (&builder)
+                    // Set a custom hostname for the app.
+                    ->set_hostname("my-sensesp-DHTxx")
+                    // Optionally, hard-code the WiFi and Signal K server
+                    // settings. This is normally not needed.
+                    ->set_wifi("HYour Wifi", "Your Wifi pwf")
+                    ->set_sk_server("SK IP", SK Port)
+                    ->get_app();
+ 
 
   // (Do whatever is required to "start" your project's sensor here)
-  // Initialize the BMP280 using the default address
+  // Initialize the DHTxx device using the default address
  dht.begin();
 
   // Read the sensor every 2 seconds
@@ -93,7 +100,7 @@ void setup() {
       new RepeatSensor<float>(read_interval, read_humidity_callback);
 
   // Set the Signal K Path for the output
-  const char* sk_path2 = "propulsion.engineRoom.temperature";
+  const char* sk_path2 = "propulsion.engineRoom.humidity";
 
   // Send the temperature to the Signal K server as a Float
   engine_room_temp->connect_to(new SKOutputFloat(sk_path1));
