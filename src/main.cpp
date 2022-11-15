@@ -76,7 +76,7 @@ void setup() {
                     ->set_hostname("my-sensesp-DHTxx")
                     // Optionally, hard-code the WiFi and Signal K server
                     // settings. This is normally not needed.
-                    ->set_wifi("HYour Wifi", "Your Wifi pwf")
+                    ->set_wifi("Your_Wifi", "Your_Wifi_pwd")
                     ->set_sk_server("SK IP", SK Port)
                     ->get_app();
  
