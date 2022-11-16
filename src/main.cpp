@@ -23,7 +23,7 @@
 // For RepeatSensor:
 #include "sensesp/sensors/sensor.h"
 
-#define DHTPIN 12     // Digital pin connected to the DHT sensor 
+#define DHTPIN 23     // Digital pin connected to the DHT sensor note that only certain GPIO #'s are useable!
 
 using namespace sensesp;
 
